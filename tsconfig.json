@@ -1,0 +1,30 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "verbatimModuleSyntax": true, // 使用新的语法来处理导入模块
+    "sourceMap": true, // 生成 source map 文件，便于调试
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"] // 配置路径别名
+    },
+    "lib": ["esnext", "dom"], // 使用 ESNext 和 DOM 库
+    "types": [
+      "@dcloudio/types", // uni-app API 类型
+      "@uni-helper/uni-ui-types" // uni-ui 组件类型
+    ],
+    "esModuleInterop": true, // 开启 ECMAScript 模块互操作
+    "strict": true, // 开启严格模式
+    "skipLibCheck": true, // 跳过库文件类型检查
+    "forceConsistentCasingInFileNames": true, // 强制文件名大小写一致
+    "noImplicitAny": true, // 禁止隐式 `any` 类型
+    "moduleResolution": "node", // 使用 Node.js 风格的模块解析
+    "resolveJsonModule": true, // 允许导入 JSON 文件
+    "allowJs": true, // 允许 JavaScript 文件编译
+    "noUnusedLocals": true, // 禁止未使用的局部变量
+    "noUnusedParameters": true, // 禁止未使用的函数参数
+    "noImplicitReturns": true, // 禁止函数没有返回值
+    "strictNullChecks": true // 开启严格的 `null` 和 `undefined` 检查
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "exclude": ["node_modules", "dist"],
+}

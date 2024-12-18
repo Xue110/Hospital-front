@@ -1,0 +1,86 @@
+{
+  "id": "4785275",
+  "name": "吉医通",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1302809",
+      "name": "关于我们",
+      "font_class": "guanyuwomen",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
+      "icon_id": "12097774",
+      "name": "右箭头",
+      "font_class": "youjiantou",
+      "unicode": "e68c",
+      "unicode_decimal": 59020
+    },
+    {
+      "icon_id": "42191242",
+      "name": "arrow-left-s-line",
+      "font_class": "arrow-left-s-line",
+      "unicode": "e747",
+      "unicode_decimal": 59207
+    },
+    {
+      "icon_id": "827640",
+      "name": "健康档案",
+      "font_class": "jiankangdangan",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
+    },
+    {
+      "icon_id": "1183030",
+      "name": "设置",
+      "font_class": "shezhi",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "2176392",
+      "name": "挂号记录",
+      "font_class": "guahaojilu",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "2696593",
+      "name": "客服",
+      "font_class": "kefu",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "4268922",
+      "name": "预约记录",
+      "font_class": "yuyuejilu",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "4386413",
+      "name": "图标-住院b",
+      "font_class": "tubiao-zhuyuanb",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "25616423",
+      "name": "12就诊记录",
+      "font_class": "a-12jiuzhenjilu",
+      "unicode": "e637",
+      "unicode_decimal": 58935
+    },
+    {
+      "icon_id": "27340826",
+      "name": "健康档案",
+      "font_class": "jiankangdangan1",
+      "unicode": "e688",
+      "unicode_decimal": 59016
+    }
+  ]
+}
