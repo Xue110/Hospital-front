@@ -26,3 +26,15 @@ export const postSendCodeAPI = (phone: number) => {
     url: `/user/user/code?phone=${phone}`,
   })
 }
+
+/**
+ * 修改密码
+ * @param data 请求参数
+ * */
+export const postChangePasswordAPI = (data: { phone: number; code: string; password: string }) => {
+  return http({
+    method: 'POST',
+    url: '/user/user/changePassword',
+    data,
+  })
+}

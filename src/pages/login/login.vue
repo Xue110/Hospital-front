@@ -139,7 +139,7 @@ const loginSuccess = (profile: LoginResult) => {
           {{ codeButtonText }}
         </button>
       </view>
-      <button class="button phone" @click="handleLogin">登录</button>
+      <button class="button phone" @click="handleLogin">登录/注册</button>
       <view class="tips"
         >登录/注册即视为你同意《服务条款》和《吉医通隐私协议》</view
       >

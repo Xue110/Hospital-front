@@ -1,98 +1,254 @@
 {
-	// 组件自动导入
-	"easycom": {
-		"autoscan": true,
-		"custom": {
-			// uni-ui 规则如下配置
-			"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
-		}
-	},
-	"pages": [
-		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "首页"
-			}
-		},
-		{
-			"path": "pages/my/my",
-			"style": {
-				"navigationBarTitleText": "我的",
-				"navigationStyle": "custom",
-				"navigationBarTextStyle": "white"
-			}
-		},
-		{
-			"path": "pages/ai/ai",
-			"style": {
-				"navigationBarTitleText": "AI问诊"
-			}
-		},
-		{
-			"path": "pages/order/order",
-			"style": {
-				"navigationBarTitleText": "订单"
-			}
-		},
-		{
-			"path": "pages/login/login",
-			"style": {
-				"navigationBarTitleText": "登录"
-			}
-		},
-		{
-			"path": "pages/about/about",
-			"style": {
-				"navigationBarTitleText": "关于我们"
-			}
-		}
-	],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	},
-	"tabBar": {
-		"color": "#333",
-		"selectedColor": "#34c7ce",
-		"backgroundColor": "#fff",
-		"borderStyle": "white",
-		"list": [
-			{
-				"text": "首页",
-				"pagePath": "pages/index/index",
-				"iconPath": "static/tabs/Pet_Boarding_default.png",
-				"selectedIconPath": "static/tabs/Pet_Boarding.png"
-			},
-			{
-				"text": "AI问诊",
-				"pagePath": "pages/ai/ai",
-				"iconPath": "static/tabs/Doctor_default.png",
-				"selectedIconPath": "static/tabs/Doctor.png"
-			},
-			{
-				"text": "订单",
-				"pagePath": "pages/order/order",
-				"iconPath": "static/tabs/Order_default.png",
-				"selectedIconPath": "static/tabs/Order.png"
-			},
-			{
-				"text": "我的",
-				"pagePath": "pages/my/my",
-				"iconPath": "static/tabs/Profile_default.png",
-				"selectedIconPath": "static/tabs/Profile.png"
-			}
-		]
-	},
-	// 分包预下载规则
-	"preloadRule": {
-		"pages/my/my": {
-			"network": "all",
-			"packages": [
-				"pagesNumber"
-			]
-		}
-	}
+  // 组件自动导入
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      // uni-ui 规则如下配置
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+    }
+  },
+  "pages": [
+    //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "首页"
+      }
+    },
+    {
+      "path": "pages/my/my",
+      "style": {
+        "navigationBarTitleText": "我的",
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/ai/ai",
+      "style": {
+        "navigationBarTitleText": "AI问诊"
+      }
+    },
+    {
+      "path": "pages/order/order",
+      "style": {
+        "navigationBarTitleText": "订单"
+      }
+    },
+    {
+      "path": "pages/login/login",
+      "style": {
+        "navigationBarTitleText": "登录"
+      }
+    },
+    {
+      "path": "pages/hospitalList/hospitalList",
+      "style": {
+        "navigationBarTitleText": "医院列表"
+      }
+    },
+    {
+      "path": "pages/disease/disease",
+      "style": {
+        "navigationBarTitleText": "疾病百科",
+        "app-plus": {
+          "titleNView": {
+            "searchInput": {
+              "align": "left",
+              "backgroundColor": "#F6F7F8",
+              "borderRadius": "40px",
+              "disabled": true,
+              "placeholder": "默认提示文本",
+              "placeholderColor": "#959FA0"
+            },
+            "buttons": [
+              {
+                "float": "right",
+                "text": "分类",
+                "fontSize": "14px",
+                "color": "#959FA0",
+                "colorPressed": "#333333" // 按下状态按钮颜色
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/medicine/medicine",
+      "style": {
+        "navigationBarTitleText": "药品百科"
+      }
+    },
+    {
+      "path": "pages/rangkingList/rangkingList",
+      "style": {
+        "navigationBarTitleText": "排行榜",
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/hospitalInfo/hospitalInfo",
+      "style": {
+        "navigationBarTitleText": "医院首页"
+      }
+    },
+    {
+      "path": "pages/department/department",
+      "style": {
+        "navigationBarTitleText": "科室选择"
+      }
+    },
+    {
+      "path": "pages/reservation/reservation",
+      "style": {
+        "navigationBarTitleText": "预约挂号"
+      }
+    },
+    {
+      "path": "pages/orderDetail/orderDetail",
+      "style": {
+        "navigationBarTitleText": "订单详情",
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/inpatient/inpatient",
+      "style": {
+        "navigationBarTitleText": "住院业务"
+      }
+    },
+    {
+      "path": "pages/bed/bed",
+      "style": {
+        "navigationBarTitleText": "床位选择"
+      }
+    },
+    {
+      "path": "pages/records/records",
+      "style": {
+        "navigationBarTitleText": "服务记录"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#34c7ce",
+    "backgroundColor": "#fff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabs/Pet_Boarding_default.png",
+        "selectedIconPath": "static/tabs/Pet_Boarding.png"
+      },
+      {
+        "text": "AI问诊",
+        "pagePath": "pages/ai/ai",
+        "iconPath": "static/tabs/Doctor_default.png",
+        "selectedIconPath": "static/tabs/Doctor.png"
+      },
+      {
+        "text": "订单",
+        "pagePath": "pages/order/order",
+        "iconPath": "static/tabs/Order_default.png",
+        "selectedIconPath": "static/tabs/Order.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/my/my",
+        "iconPath": "static/tabs/Profile_default.png",
+        "selectedIconPath": "static/tabs/Profile.png"
+      }
+    ]
+  },
+  // 分包预下载规则
+  "preloadRule": {
+    "pages/my/my": {
+      "network": "all",
+      "packages": ["pagesNumber"]
+    }
+  },
+  "subPackages": [
+    {
+      "root": "pagesNumber",
+      "pages": [
+        {
+          "path": "aboutUs/aboutUs",
+          "style": {
+            "navigationBarTitleText": "关于我们"
+          }
+        },
+        {
+          "path": "settings/settings",
+          "style": {
+            "navigationBarTitleText": "设置"
+          }
+        },
+        {
+          "path": "updatePwd/updatePwd",
+          "style": {
+            "navigationBarTitleText": "修改密码"
+          }
+        },
+        {
+          "path": "profile/profile",
+          "style": {
+            "navigationBarTitleText": "个人信息",
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "family/family",
+          "style": {
+            "navigationBarTitleText": "家庭成员"
+          }
+        },
+        {
+          "path": "addFamily/addFamily",
+          "style": {
+            "navigationBarTitleText": "添加成员",
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "healthRecords/healthRecords",
+          "style": {
+            "navigationBarTitleText": "健康档案"
+          }
+        },
+        {
+          "path": "disease/disease",
+          "style": {
+            "navigationBarTitleText": "疾病信息"
+          }
+        },
+        {
+          "path": "medicine/medicine",
+          "style": {
+            "navigationBarTitleText": "药物信息"
+          }
+        },
+        {
+          "path": "updateHealth/updateHealth",
+          "style": {
+            "navigationBarTitleText": "健康档案操作",
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        }
+      ]
+    }
+  ]
 }

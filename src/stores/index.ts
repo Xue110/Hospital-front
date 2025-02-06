@@ -11,3 +11,6 @@ export default pinia
 
 // 模块统一导出
 export * from './modules/member'
+export * from './modules/health'
+export * from './modules/disease'
+export * from './modules/medicine'

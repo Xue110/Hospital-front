@@ -1,38 +1,82 @@
 <script lang="ts" setup>
-import { useMemberStore } from '@/stores';
-import { ref } from 'vue';
+import {
+  useMemberStore,
+  useHealthStore,
+  useDiseaseStore,
+  useMedicineStore,
+} from '@/stores';
+import { ref, onMounted } from 'vue';
+import {
+  getHealthInfo,
+  getDiseaseInfo,
+  getMedicineInfo,
+} from '@/services/my.ts';
+import { onShow } from '@dcloudio/uni-app'
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync();
-console.log(safeAreaInsets);
 
 // 获取会员信息
 const memberStore = useMemberStore();
-
-// const nickName = ref(memberStore.profile ? memberStore.profile.nickName : '默认昵称')
-// const avatarUrl = ref(
-//   memberStore.profile
-//     ? memberStore.profile.image
-//     : 'memberStore.profile',
-// )
-
+const nickName = ref(
+  memberStore.profile ? memberStore.profile.username : '默认昵称'
+);
+const avatarUrl = ref(memberStore.profile ? memberStore.profile.image : null);
+console.log(nickName, avatarUrl);
 // 记录选项
 const orderTypes = [
   { type: 1, text: '挂号记录', icon: 'icon-guahaojilu' },
-  { type: 2, text: '就诊记录', icon: 'icon-a-12jiuzhenjilu:' },
-  { type: 3, text: '预约记录', icon: 'icon-yuyuejilu' },
-  { type: 3, text: '病床信息', icon: 'icon-tubiao-zhuyuanb' },
+  { type: 2, text: '病床信息', icon: 'icon-tubiao-zhuyuanb' },
+  { type: 3, text: '就诊记录', icon: 'icon-a-12jiuzhenjilu:' },
+  { type: 4, text: '预约记录', icon: 'icon-yuyuejilu' },
 ];
 
-const healthFiles = ref({
-  patientName: '张三',
-  diseaseName: '感冒',
-  medicationName: '感冒药',
-  height: '170cm',
-  weight: '60kg',
-  bloodPressure: '120/80',
-  bloodSugar: '5.4',
-  allergyInfo: '无',
+const healthStore = useHealthStore();
+const healthFiles = ref({});
+const getInfo = async () => {
+  const res = await getHealthInfo(); // 健康信息 API
+  healthStore.setHealth(res.data);
+  healthFiles.value = res.data;
+};
+
+const diseaseStore = useDiseaseStore();
+const fetchDiseaseInfo = async () => {
+  // 修改函数名，避免与外部 API 函数名冲突
+  const res = await getDiseaseInfo(); // 疾病信息 API
+  diseaseStore.setDisease(res.data);
+};
+
+const medicineStore = useMedicineStore();
+const fetchMedicineInfo = async () => {
+  // 修改函数名，避免与外部 API 函数名冲突
+  const res = await getMedicineInfo(); // 药物信息 API
+  medicineStore.setMedicine(res.data);
+};
+
+onShow(() => {
+  getInfo();
+  fetchDiseaseInfo();
+  fetchMedicineInfo();
 });
+// 监听事件以刷新页面
+uni.$on('getAgain', () => {
+  getInfo();
+  healthFiles.value = healthStore.health;
+});
+// 用于格式化数组数据，截取前 1 个并加上 '...'
+const formatText = (arr) => {
+  // 检查传入的 arr 是否是数组并且不为空
+  if (arr && Array.isArray(arr) && arr.length > 0) {
+    const maxLength = 1; // 设置最大显示项目数为 1
+    const truncatedArray = arr.slice(0, maxLength); // 获取数组的前 1 个元素
+    const displayText = truncatedArray.join(', '); // 将数组项连接成字符串
+    // 如果数组长度大于 maxLength，显示第一个元素并加上 '...'
+    if (arr.length > maxLength) {
+      return displayText + '...'; // 超过 1 个元素时加上 '...'
+    }
+    return displayText; // 如果数组元素只有 1 个，直接显示
+  }
+  return ''; // 如果不是数组或空数组，返回空字符串
+};
 </script>
 
 <template>
@@ -48,12 +92,21 @@ const healthFiles = ref({
           <view class="nickname"> {{ nickName }} </view>
           <navigator
             class="extra"
-            url="/pagesNumber/profile/profile"
+            url="/pagesNumber/family/family"
             hover-class="none"
           >
-            <text class="update">更新头像昵称</text>
+            <text class="update"
+              ><text class="iconfont icon-jiaren"></text> 我的家人</text
+            >
           </navigator>
         </view>
+        <navigator
+          class="settings"
+          url="/pagesNumber/profile/profile"
+          hover-class="none"
+        >
+          修改个人信息<text class="iconfont icon-right"></text>
+        </navigator>
       </view>
       <!-- 情况2：未登录 -->
       <view class="overview" v-else>
@@ -77,13 +130,6 @@ const healthFiles = ref({
           </view>
         </view>
       </view>
-      <navigator
-        class="settings"
-        url="/pagesNumber/message/message"
-        hover-class="none"
-      >
-        消息中心<text class="iconfont icon-right"></text>
-      </navigator>
     </view>
     <!-- 医院服务记录 -->
     <view class="orders">
@@ -91,7 +137,7 @@ const healthFiles = ref({
         服务记录
         <navigator
           class="navigator"
-          url="/pagesOrder/list/list?type=0"
+          url="/pages/records/records?type=0"
           hover-class="none"
         >
           查看全部记录<text class="iconfont icon-right"></text>
@@ -103,7 +149,7 @@ const healthFiles = ref({
           v-for="item in orderTypes"
           :key="item.type"
           :class="item.icon"
-          :url="`/pagesOrder/list/list?type=${item.type}`"
+          :url="`/pages/records/records?type=${item.type}`"
           class="navigator"
           hover-class="none"
         >
@@ -121,7 +167,7 @@ const healthFiles = ref({
         >健康档案
         <navigator
           class="navigator"
-          url="/pagesOrder/list/list?type=0"
+          url="/pagesNumber/healthRecords/healthRecords"
           hover-class="none"
         >
           查看档案<text class="iconfont icon-right"></text>
@@ -132,7 +178,7 @@ const healthFiles = ref({
           当前无健康档案
           <navigator
             class="navigator"
-            url="/pagesOrder/list/list?type=0"
+            url="/pagesNumber/updateHealth/updateHealth?type=0"
             hover-class="none"
           >
             新建档案
@@ -142,43 +188,77 @@ const healthFiles = ref({
           <view class="info-row">
             <view class="info-item">
               <text class="label">患者姓名</text>
-              <text class="value">{{ healthFiles.patientName }}</text>
+              <text class="value">{{
+                healthFiles.userName ? healthFiles.userName : '未填写'
+              }}</text>
             </view>
             <view class="info-item">
               <text class="label">疾病</text>
-              <text class="value">{{ healthFiles.diseaseName }}</text>
+              <text class="value">{{
+                formatText(healthFiles.diseaseName)
+                  ? formatText(healthFiles.diseaseName)
+                  : '未填写'
+              }}</text>
             </view>
           </view>
           <view class="info-row">
             <view class="info-item">
               <text class="label">药物</text>
-              <text class="value">{{ healthFiles.medicationName }}</text>
+              <text class="value">{{
+                formatText(healthFiles.medicationName)
+                  ? formatText(healthFiles.medicationName)
+                  : '未填写'
+              }}</text>
             </view>
             <view class="info-item">
               <text class="label">血压</text>
-              <text class="value">{{ healthFiles.bloodPressure }}mmHg</text>
+              <text class="value"
+                >{{
+                  healthFiles.bloodPressure
+                    ? healthFiles.bloodPressure
+                    : '未填写'
+                }}mmHg</text
+              >
             </view>
           </view>
           <view class="info-row">
             <view class="info-item">
               <text class="label">血糖</text>
-              <text class="value">{{ healthFiles.bloodSugar }}mmol/L</text>
+              <text class="value"
+                >{{
+                  healthFiles.bloodSugar ? healthFiles.bloodSugar : '未填写'
+                }}mmol/L</text
+              >
             </view>
             <view class="info-item">
               <text class="label">过敏原</text>
-              <text class="value">{{ healthFiles.allergyInfo }}</text>
+              <text class="value">{{
+                healthFiles.allergyInfo ? healthFiles.allergyInfo : '未填写'
+              }}</text>
             </view>
           </view>
         </view>
       </view>
     </view>
     <view class="orders list">
-      <text class="iconfont icon-shezhi"></text> 设置
-      <text class="iconfont icon-right"></text>
+      <navigator
+        class="navigator"
+        url="/pagesNumber/settings/settings"
+        hover-class="none"
+      >
+        <text class="iconfont icon-shezhi"></text> 设置
+        <text class="iconfont icon-right"></text>
+      </navigator>
     </view>
     <view class="orders list1">
-      <text class="iconfont icon-guanyuwomen"></text> 关于我们
-      <text class="iconfont icon-right"></text>
+      <navigator
+        class="navigator"
+        url="/pagesNumber/aboutUs/aboutUs"
+        hover-class="none"
+      >
+        <text class="iconfont icon-guanyuwomen"></text> 关于我们
+        <text class="iconfont icon-right"></text>
+      </navigator>
     </view>
   </scroll-view>
 </template>
@@ -194,7 +274,9 @@ page {
   position: relative;
   height: 100%;
 }
-
+.icon-jiaren {
+  font-size: 20rpx;
+}
 .viewport::before {
   content: '';
   position: absolute;
@@ -312,7 +394,7 @@ page {
   left: 50%; /* 让伪元素从中间开始 */
   width: 95%; /* 设置边框的长度，调整此值来控制中间部分的长度 */
   height: 1rpx; /* 边框的高度 */
-  background-color: rgba(94, 89, 89, 0.33); /* 边框颜色 */
+  background-color: rgba(192, 182, 182, 0.12); /* 边框颜色 */
   transform: translateX(-50%); /* 使其水平居中 */
 }
 .orders {

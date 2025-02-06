@@ -11,7 +11,7 @@ onHide(() => {
 });
 </script>
 <style lang="scss">
-@import "@/styles/download/font_4785275_qu60hjrrkgg/iconfont.scss";
+@import "@/styles/download/font_4785275_bl4rjvcz06a/iconfont.scss";
 
 view,
 navigator,
