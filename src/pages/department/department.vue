@@ -25,8 +25,6 @@ import { getDepartmentList } from '@/services/index.ts';
 // 获取页面的传参
 const query = defineProps<{ hospitalId: string; type: string }>();
 const hospitalId = query.hospitalId;
-console.log("医院id",hospitalId);
-console.log("医院id传过来了吗",query.hospitalId);
 
 // 获取科室信息
 const department = ref([

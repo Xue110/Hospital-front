@@ -90,7 +90,7 @@ const loginSuccess = (profile: LoginResult) => {
   if (launchOptions.scene === 1001) {  
     // 如果是首次启动（登录后），跳转到首页
     uni.switchTab({
-      url: '/pages/index/index'  // 这里的路径根据你的首页路径调整
+      url: '/pages/index/index'
     });
   } else {
     // 如果是从其他页面跳转回来，返回上一页

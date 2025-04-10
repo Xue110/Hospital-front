@@ -31,19 +31,20 @@ const updateCursor = async (orderState: number) => {
   } else if (orderState === 1) {
     console.log('获取未支付订单');
     const res = await getMyOrderList();
-    orderList.value = res.data.unpaidorder;
+    orderList.value = res.data.unpaidOrder;
   } else if (orderState === 2) {
     console.log('获取已支付订单');
     const res = await getMyOrderList();
-    orderList.value = res.data.paidorder;
+    orderList.value = res.data.paidOrder;
   } else if (orderState === 3) {
     console.log('获取已取消订单');
     const res = await getMyOrderList();
-    orderList.value = res.data.cancelledorder;
+    orderList.value = res.data.cancelledOrder;
   } else if (orderState === 4) {
     console.log('获取已超时订单');
     const res = await getMyOrderList();
-    orderList.value = res.data.overdueorder;
+    orderList.value = res.data.overdueOrder;
+    console.log(orderList.value);
   } else {
     return;
   }

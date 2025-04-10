@@ -18,6 +18,7 @@
         class="input-box"
         placeholder="请输入您的问题"
         @input="handleInputChange"
+        @keydown="handleInput"
       />
       <button class="send-button" @click="sendMessage" :disabled="isSending">
         <image src="/src/static/image/send.png" mode="widthFix" />
@@ -48,8 +49,14 @@ let debounceTimer: ReturnType<typeof setTimeout>;
 const handleInputChange = () => {
   if (debounceTimer) clearTimeout(debounceTimer);
   debounceTimer = setTimeout(() => {
-    // 在这里可以做一些输入验证
+    // 在防抖时间结束后执行的代码
   }, 500); // 设置500ms的防抖
+};
+
+const handleInput = (e: KeyboardEvent) => {
+  if (e.key === 13) {
+    sendMessage();
+  }
 };
 
 // 发送消息

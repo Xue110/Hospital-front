@@ -216,7 +216,7 @@ onMounted(() => {
                   >医院名: {{ item.hospitalName }}</view
                 >
                 <view class="name ellipsis"
-                  >诊疗时间: {{ item.startTime }} - {{ item.endTime }}</view
+                  style="font-size:26rpx;">诊疗时间: {{ item.startTime }} - {{ item.endTime }}</view
                 >
                 <view class="type">{{
                   item.status === 1
